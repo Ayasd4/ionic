@@ -8,6 +8,7 @@ import { VehiculeStatPageRoutingModule } from './vehicule-stat-routing.module';
 
 import { VehiculeStatPage } from './vehicule-stat.page';
 import { ChartModule } from 'angular-highcharts';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
   imports: [
@@ -16,8 +17,10 @@ import { ChartModule } from 'angular-highcharts';
     IonicModule,
     VehiculeStatPageRoutingModule,
     ChartModule,
-    VehiculeStatPage
+    VehiculeStatPage,
+    FooterComponent
+
   ],
   //declarations: [VehiculeStatPage]
 })
-export class VehiculeStatPageModule {}
+export class VehiculeStatPageModule { }

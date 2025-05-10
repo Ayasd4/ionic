@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
@@ -12,7 +12,7 @@ interface AuthResponse {
 })
 export class LoginService {
 
-  baseUrl: string= "http://localhost:3100/authentification";
+ baseUrl: string = `https://pfe-vxpy.onrender.com`;
   
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -34,12 +34,12 @@ export class LoginService {
    }
 
   login(email: string, password: string): Observable<any> {
-    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login`, { email, password }).pipe(
+    console.log(this.baseUrl);
+    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/authentification/login`, { email, password }).pipe(
       
       tap((response) => {
         if (response && response.token && response.user) {
           
-
           console.log('User conected:', response.user); // Vérifiez ici si le rôle est présent dans l'objet `user`
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));          
@@ -51,6 +51,22 @@ export class LoginService {
       })
     );
 
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/authentification/forgotPassword`, { email });
+  }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Récupération du token stocké dans localStorage
+    
+    if (!token) {
+      throw new Error('Token manquant ! L’utilisateur doit se reconnecter.');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); //const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.httpClient.post(`${this.baseUrl}/authentification/changePassword`, { oldPassword, newPassword }, {headers});
   }
 
 

@@ -1,10 +1,73 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>vehicule-stat</ion-title>
+    <ion-title>Vehicule</ion-title>
+    <ion-buttons slot="end" *ngIf="isLoggedIn">
+      <ion-button (click)="openPopover($event)">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label *ngIf="user" class="m-l-5">{{ user.nom }}</ion-label>
+      </ion-button>
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (didDismiss)="popoverOpen = false" translucent="true">
+        <ng-template>
+          <ion-list>
+            <ion-item button (click)="changePassword()">
+              <ion-icon name="key-outline" slot="start" style="color: black;"></ion-icon>
+              Change Password
+            </ion-item>
+            
+            <ion-item button (click)="logout()">
+              <ion-icon name="log-out-outline" slot="start" style="color: black;"></ion-icon>
+              Sign Out
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="chart-container" [chart]="chart"></div>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" sizeMd="4"> 
+        <ion-card>
+          <ion-card-header>
+            <ion-icon name="car-outline"></ion-icon>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="top">{{ dispoService }}%</div>
+            <div class="bottom">En Service</div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-icon name="construct-outline"></ion-icon>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="top">{{ dispoMaint }}%</div>
+            <div class="bottom">En Maintenance</div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" sizeMd="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-icon name="warning-outline"></ion-icon>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="top">{{ dispoPanne }}%</div>
+            <div class="bottom">En Panne</div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>

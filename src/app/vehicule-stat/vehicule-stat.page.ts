@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { Chart, ChartModule } from 'angular-highcharts';
 import { StatService } from '../services/stat.service';
+import { FooterComponent } from '../footer/footer.component';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-vehicule-stat',
@@ -15,25 +20,83 @@ import { StatService } from '../services/stat.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    ChartModule
+    ChartModule,
+    ReactiveFormsModule,
+    FooterComponent
+
   ]
 })
 export class VehiculeStatPage implements OnInit {
 
+  chart!: Chart;
+  chartOptions: Highcharts.Options = {};
 
+  isLoggedIn: boolean = false;
+  user: any;
+  subscription!: Subscription;
+  popoverOpen = false;
+  popoverEvent: any;
 
- chart!: Chart;
- chartOptions: Highcharts.Options = {};
+  constructor(private statService: StatService,
+    private router: Router,
+    private loginService: LoginService,
+    private cdRef: ChangeDetectorRef,
+    private ngxService: NgxUiLoaderService,
+  ) { }
 
-
-  constructor(private statService: StatService) { }
   dispoService: number = 0;
   dispoMaint: number = 0;
   dispoPanne: number = 0;
 
   ngOnInit(): void {
     this.loadDisponibilites();
+    this.profilUser();
   }
+
+  profilUser(){
+    this.subscription = this.loginService.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+      console.log("isLoggedIn:", this.isLoggedIn);
+      if (this.isLoggedIn) {
+        this.user = this.loginService.getUser(); // Récupère les données de l'utilisateur
+        console.log("Utilisateur connecté:", this.user); // Vérifiez que l'utilisateur est récupéré
+      }
+      this.cdRef.detectChanges(); //Force Angular à mettre à jour la vue
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  openPopover(ev: any) {
+    this.popoverEvent = ev;
+    this.popoverOpen = true;
+  }
+
+
+  logout() {
+    this.ngxService.start();
+    console.log('user logged out');
+    this.loginService.logout();
+    this.isLoggedIn = false;
+
+    setTimeout(() => {
+      this.ngxService.stop(); // Arrêter l'animation ou le chargement
+      this.router.navigate(['/login']);
+    }, 500);
+  }
+
+  changePassword() {
+    this.router.navigateByUrl('/change-password');
+
+    /*const dialogConfig = new MatDialogConfig;
+    dialogConfig.width = "550px";
+    this.dialog.open(ChangePasswordPage, dialogConfig);*/
+  }
+
 
   loadDisponibilites() {
     // On attend les 3 appels à l’API avant de créer le graphique
@@ -110,7 +173,7 @@ export class VehiculeStatPage implements OnInit {
     });
   }
 
-  
+
 }
 
 

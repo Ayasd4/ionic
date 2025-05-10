@@ -58,7 +58,6 @@ export class LoginPage implements OnInit {
     this.authService.login(email, password).subscribe({
       next: (response) => {
 
-
         console.log('Réponse de connexion:', response); // Inspecte la réponse
 
         if (response && response.token && response.user) {
@@ -76,19 +75,10 @@ export class LoginPage implements OnInit {
 
           if (userRole.includes('chef de direction technique')) {
             this.router.navigate(['/dashboard']);
+
           } else {
             this.router.navigate(['/login']);
           }
-          
-          /*if (userRole === 'chef de direction technique') {
-            this.router.navigate(['/dashboard']);
-
-
-          } 
-
-          else {
-            this.router.navigate(['/login']); // Rôle non reconnu
-          }*/
 
 
         } else {

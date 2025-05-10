@@ -1,38 +1,79 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>consomation-stat</ion-title>
+    <ion-title>Consommation</ion-title>
+    <ion-buttons slot="end" *ngIf="isLoggedIn">
+      <ion-button (click)="openPopover($event)">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label *ngIf="user" class="m-l-5">{{ user.nom }}</ion-label>
+      </ion-button>
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (didDismiss)="popoverOpen = false" translucent="true">
+        <ng-template>
+          <ion-list>
+            <ion-item button (click)="changePassword()">
+              <ion-icon name="key-outline" slot="start" style="color: black;"></ion-icon>
+              Changer le mot de passe
+            </ion-item>
+            <ion-item button (click)="logout()">
+              <ion-icon name="log-out-outline" slot="start" style="color: black;"></ion-icon>
+              Déconnexion
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="form-group">
-
     <mat-dialog-content>
-      <form action="">
-        <label for="numparc">Numéro de Parc :</label>
-  
-      <mat-form-field>
-  
-        <mat-select [(ngModel)]="numparc" name="numparc" id="numparc" class="form-control"
-          placeholder="Saisir numéro de parc...">
-          <mat-option *ngFor="let num of numparcList" [value]="num">
-            {{num}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button class="btn btn-primary mt-2" (click)="fetchConsomation()">consulter</button>
-      </form>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Numéro de parc</mat-label>
+          <mat-select [(ngModel)]="numparc" name="numparc" id="numparc" placeholder="Sélectionnez un véhicule...">
+            <mat-option *ngFor="let num of numparcList" [value]="num">
+              {{ num }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ion-button
+        expand="block"
+        shape="round"
+        class="mt-3"
+        (click)="fetchConsomation()"
+      >
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Consulter
+      </ion-button>
+            </form>
     </mat-dialog-content>
-  
-  
   </div>
+
+  <!-- Graphique -->
   <div *ngIf="showChart" class="mt-4">
-    <highcharts-chart 
-      [Highcharts]="Highcharts" 
+    <highcharts-chart
+      [Highcharts]="Highcharts"
       [options]="chartOptions"
       style="width: 100%; height: 400px; display: block;">
     </highcharts-chart>
   </div>
-  
-  
+
+
+  <!-- Détails mensuels de consommation -->
+<div *ngIf="showChart && consomationMensuelle.length > 0" class="custom-box">
+  <h3>Détail de la consommation par mois</h3>
+  <ion-list>
+    <ion-item *ngFor="let item of consomationMensuelle">
+      <ion-label>
+        <strong>{{ item.mois }}/{{ item.annee }}</strong> = {{ item.total_consommation }} litres
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+
+ 
 </ion-content>
+
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>

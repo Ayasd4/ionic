@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -26,6 +26,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HighchartsChartModule,
     ChartModule,
+    MatIconModule, 
+    RouterModule,
 
     // Angular Material modules
     MatButtonModule,
@@ -53,7 +57,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatOptionModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatSnackBarModule 
+    MatSnackBarModule ,
+    MatToolbarModule, 
+    MatMenuModule,
+
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

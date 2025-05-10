@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  baseUrl: string = "http://localhost:3100/dashboard";
+  baseUrl: string = "https://pfe-vxpy.onrender.com/dashboard";
 
   constructor(private httpClient: HttpClient) { }
 

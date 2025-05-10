@@ -1,20 +1,21 @@
 <div class="container">
-  <button mat-icon-button type="submit" (click)="goToDashbord()" aria-label="Home">
+  <button mat-icon-button type="submit" [ngClass]="{'active': isActive('/dashboard')}" (click)="goToDashbord()"
+    aria-label="Home">
     <mat-icon>home</mat-icon>
     <span>Home</span>
   </button>
 
-  <button mat-icon-button type="button" aria-label="Véhicule disponible">
+  <button mat-icon-button type="button" (click)="goToVehiculeStat()" [ngClass]="{'active': isActive('/vehicule-stat')}" aria-label="Véhicule disponible">
     <mat-icon color="primary">pie_chart</mat-icon>
     <span>Vehicle</span>
   </button>
 
-  <button mat-icon-button type="submit" aria-label="Order">
+  <button mat-icon-button type="submit" (click)="goToOrderStat()" [ngClass]="{'active': isActive('/order-stat')}" aria-label="Order">
     <mat-icon>pie_chart_outline</mat-icon>
     <span>Order</span>
   </button>
 
-  <button mat-icon-button type="submit" aria-label="Consumption">
+  <button mat-icon-button type="submit" (click)="goToConsomationStat()" [ngClass]="{'active': isActive('/co')}" aria-label="Consumption">
     <mat-icon>bar_chart</mat-icon>
     <span>Consumption</span>
   </button>

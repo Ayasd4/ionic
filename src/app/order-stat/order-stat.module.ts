@@ -12,6 +12,7 @@ import { MatOptionModule } from '@angular/material/index.d-DSgY27vJ';
 import { MatSelectModule } from '@angular/material/module.d-DBDMCw5I';
 import { MatFormFieldModule } from '@angular/material/module.d-vndDeG-q';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
   imports: [
@@ -19,9 +20,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FormsModule,
     IonicModule,
     OrderStatPageRoutingModule,
-    OrderStatPage
-    
+    OrderStatPage,
+    FooterComponent
+
+
   ],
   //declarations: [OrderStatPage]
 })
-export class OrderStatPageModule {}
+export class OrderStatPageModule { }

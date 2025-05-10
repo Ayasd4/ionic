@@ -11,7 +11,7 @@
     <form [formGroup]="loginForm" class="form"><!--(ngSubmit)="login()"-->
       <input formControlName="email" required class="input" type="email" placeholder="E-mail">
       <input formControlName="password" required class="input" type="password" placeholder="Password">
-      <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
+      <span class="forgot-password"><a href="forgot-password"  routerLink="/forgot-password" routerLinkActive="active">Forgot Password ?</a></span>
       <button class="login-button" type="submit" (click)="login()" value="Login">Login</button>
     </form>
 

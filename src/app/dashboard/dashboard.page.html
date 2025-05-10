@@ -1,6 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>dashboard</ion-title>
+    <ion-buttons slot="end" *ngIf="isLoggedIn">
+      <ion-button (click)="openPopover($event)">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label *ngIf="user" class="m-l-5">{{ user.nom }}</ion-label>
+      </ion-button>
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (didDismiss)="popoverOpen = false" translucent="true">
+        <ng-template>
+          <ion-list>
+            <ion-item button (click)="changePassword()">
+              <ion-icon name="key-outline" slot="start" style="color: black;"></ion-icon>
+              Change Password
+            </ion-item>
+            
+            <ion-item button (click)="logout()">
+              <ion-icon name="log-out-outline" slot="start" style="color: black;"></ion-icon>
+              Sign Out
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -63,5 +86,5 @@
 </ion-content>
 
 <ion-footer>
- <app-footer></app-footer>
+  <app-footer></app-footer>
 </ion-footer>

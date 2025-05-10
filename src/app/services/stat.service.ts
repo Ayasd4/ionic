@@ -10,7 +10,7 @@ export class StatService {
   constructor(private httpClient: HttpClient) { }
 
 
-  Url: string = "http://localhost:3100/disponibilite";
+  Url: string = "https://pfe-vxpy.onrender.com/disponibilite";
 
   getDispoService(): Observable<any>{
     return this.httpClient.get<any>(`${this.Url}/totalDispoService`);
@@ -24,7 +24,7 @@ export class StatService {
     return this.httpClient.get<any>(`${this.Url}/totalDispoPanne`);
   }
 
-  ordreUrl: string = "http://localhost:3100/ordreStat";
+  ordreUrl: string = "https://pfe-vxpy.onrender.com/ordreStat";
 
   getDispoOuvert(): Observable<any>{
     return this.httpClient.get<any>(`${this.ordreUrl}/totalDispoOuvert`);
@@ -38,7 +38,7 @@ export class StatService {
     return this.httpClient.get<any>(`${this.ordreUrl}/totalDispoFerme`);
   }
 
-  statistiquesUrl: string = "http://localhost:3100/statistiques";
+  statistiquesUrl: string = "https://pfe-vxpy.onrender.com/statistiques";
   getTotalConsomationByVehiculeAndMonth(numparc: number): Observable<any[]> {
     return this.httpClient.get<any[]>(`${this.statistiquesUrl}/${numparc}`);
 }

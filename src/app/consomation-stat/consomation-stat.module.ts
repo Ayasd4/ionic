@@ -15,6 +15,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FooterComponent } from '../footer/footer.component';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatOptionModule,
     ReactiveFormsModule,
-    HighchartsChartModule 
+    HighchartsChartModule ,
+      FooterComponent
+    
   ],
   //declarations: [ConsomationStatPage]
 })
