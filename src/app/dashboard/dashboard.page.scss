@@ -32,13 +32,18 @@ ion-toolbar {
 }
 
 ion-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/*ion-title {
     font-size: 22px;
     margin-left: -70px;    
     margin-right:40px;
     font-weight: bold;
     text-transform: capitalize;
     text-align: center;
-}
+}*/
 
 ion-grid {
     padding: 16px;

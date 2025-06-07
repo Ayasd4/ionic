@@ -1,19 +1,84 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <div class="ion-text-center">
-      <img src="assets/srtj.png" alt="Logo SRT Jendouba" >
-    </div>
   </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-progress-bar class="progress" *ngIf="progress > 0" [value]="progress" type="determinate" color="primary"></ion-progress-bar>
 
   <div class="container">
 
+    <div class="logo-container ion-text-center">
+      <img src="assets/srtj.png" alt="Logo SRT Jendouba" class="logo-img" />
+    </div>
+
     <div class="heading">Login</div>
-    <form [formGroup]="loginForm" class="form"><!--(ngSubmit)="login()"-->
+    <form [formGroup]="loginForm" class="form">
+      <!-- Email -->
+      <input formControlName="email" required class="input" type="email" placeholder="E-mail"
+        [ngClass]="{'is-invalid': email?.invalid && email?.touched}" />
+      <mat-error *ngIf="email?.hasError('required') && email?.touched"><span class="mat-error-message">Email
+          Required</span></mat-error>
+      <mat-error *ngIf="email?.hasError('email') && email?.touched"><span class="mat-error-message">Please enter a valid
+          email.</span> </mat-error>
+
+      <!-- Password -->
+      <input formControlName="password" required class="input" type="password" placeholder="Password"
+        [ngClass]="{'is-invalid': password?.invalid && password?.touched}" />
+      <mat-error *ngIf="password?.hasError('required') && password?.touched"><span class="mat-error-message">Password
+          Required</span></mat-error>
+      <mat-error *ngIf="password?.hasError('minlength') && password?.touched"><span class="mat-error-message">Password
+          must be at least 5 </span>
+        characters.</mat-error>
+
+      <span class="forgot-password"><a href="forgot-password" routerLink="/forgot-password"
+          routerLinkActive="active">Forgot Password ?</a></span>
+      <button class="login-button" type="submit" (click)="login()" value="Login">Login</button>
+
+
+    </form>
+    <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+
+  </div>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <div class="container">
+    <div class="logo-container ion-text-center">
+      <img src="assets/srtj.png" alt="Logo SRT Jendouba" class="logo-img" />
+    </div>
+
+    <div class="heading">Login</div>
+    <form [formGroup]="loginForm" class="form">
       <input formControlName="email" required class="input" type="email" placeholder="E-mail">
       <input formControlName="password" required class="input" type="password" placeholder="Password">
-      <span class="forgot-password"><a href="forgot-password"  routerLink="/forgot-password" routerLinkActive="active">Forgot Password ?</a></span>
+      <span class="forgot-password"><a href="forgot-password" routerLink="/forgot-password"
+          routerLinkActive="active">Forgot Password ?</a></span>
       <button class="login-button" type="submit" (click)="login()" value="Login">Login</button>
     </form>
 
   </div>
-</ion-content>
+</ion-content>-->

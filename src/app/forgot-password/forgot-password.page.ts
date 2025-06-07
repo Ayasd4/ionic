@@ -23,6 +23,13 @@ import { FooterComponent } from '../footer/footer.component';
   ]
 })
 export class ForgotPasswordPage implements OnInit {
+   handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+  
   
   ngOnInit(): void {
     

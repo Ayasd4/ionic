@@ -9,7 +9,7 @@ export class NumparcService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl: string = "https://pfe-vxpy.onrender.com";
+  baseUrl: string = "https://pfe-backend-ztxi.onrender.com";
 
   fetchAllNumparc(): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/getAllNumparc`);

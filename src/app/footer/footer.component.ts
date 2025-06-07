@@ -56,4 +56,10 @@ export class FooterComponent implements OnInit {
     //this.router.navigate(['/dashbord'])
   }
 
+  goToInterStat(){
+    this.navCtrl.navigateForward('/intervention-stat');
+
+    //this.router.navigate(['/dashbord'])
+  }
+
 }

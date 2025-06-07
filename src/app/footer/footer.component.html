@@ -15,8 +15,13 @@
     <span>Order</span>
   </button>
 
-  <button mat-icon-button type="submit" (click)="goToConsomationStat()" [ngClass]="{'active': isActive('/co')}" aria-label="Consumption">
+  <button mat-icon-button type="submit" (click)="goToConsomationStat()" [ngClass]="{'active': isActive('/consomation-stat')}" aria-label="Consumption">
+    <mat-icon>show_chart</mat-icon>
+    <span>Consump</span>
+  </button>
+
+  <button mat-icon-button type="submit" (click)="goToInterStat()" [ngClass]="{'active': isActive('/intervention-stat')}" aria-label="Intervention">
     <mat-icon>bar_chart</mat-icon>
-    <span>Consumption</span>
+    <span>interv</span>
   </button>
 </div>

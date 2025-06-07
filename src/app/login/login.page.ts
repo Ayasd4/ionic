@@ -6,6 +6,8 @@ import { LoginService } from './login.service';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from './token.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-login',
@@ -16,16 +18,25 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule, 
-    HttpClientModule
-    //RouterModule.forChild(routes)
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
 })
 export class LoginPage implements OnInit {
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
 
   loginForm: FormGroup;
   errorMessage: string = '';
   userRole: string = '';  // Variable pour stocker le rôle de l'utilisateur
+  progress = 0;
+  progressInterval: any;
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -36,27 +47,53 @@ export class LoginPage implements OnInit {
   constructor(private fb: FormBuilder,
     private authService: LoginService,
     private tokenService: TokenService,
-    private router: Router,) {
+    private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  get email() {
+    return this.loginForm.get('email');
   }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
 
   login() {
 
-    if (this.loginForm.invalid) {
+    /*if (this.loginForm.invalid) {
       this.errorMessage = 'Please fill in all fields correctly';
+      return;
+    }*/
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
+    const data = this.loginForm.value;
+
     const { email, password } = this.loginForm.value;
+
+    // Démarrer la barre de progression animée
+    this.progress = 0.1;
+    this.progressInterval = setInterval(() => {
+      if (this.progress < 0.9) {
+        this.progress += 0.01;
+      }
+    }, 50)
 
     this.authService.login(email, password).subscribe({
       next: (response) => {
+        clearInterval(this.progressInterval); // arrêter l'animation
+        this.progress += 0.01;
 
         console.log('Réponse de connexion:', response); // Inspecte la réponse
 
@@ -88,6 +125,9 @@ export class LoginPage implements OnInit {
 
       },
       error: (error) => {
+        clearInterval(this.progressInterval); // arrêter l'animation
+        this.progress = 0; // Échec : on cache la barre
+
         console.error('Login error', error);
         this.errorMessage = 'Invalid email or password';
       }

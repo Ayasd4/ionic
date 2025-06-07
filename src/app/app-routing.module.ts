@@ -40,7 +40,11 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },  {
+    path: 'intervention-stat',
+    loadChildren: () => import('./intervention-stat/intervention-stat.module').then( m => m.InterventionStatPageModule)
   },
+
 
 
 

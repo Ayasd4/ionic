@@ -28,6 +28,13 @@ import { Subscription } from 'rxjs';
 })
 export class OrderStatPage implements OnInit {
 
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+
   chart!: Chart;
 
   constructor(private statService: StatService,

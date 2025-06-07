@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>intervention</ion-title>
+    <ion-buttons slot="end" *ngIf="isLoggedIn">
+      <ion-button (click)="openPopover($event)">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label *ngIf="user" class="m-l-5">{{ user.nom }}</ion-label>
+      </ion-button>
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (didDismiss)="popoverOpen = false" translucent="true">
+        <ng-template>
+          <ion-list>
+            <ion-item button (click)="changePassword()">
+              <ion-icon name="key-outline" slot="start" style="color: black;"></ion-icon>
+              Changer le mot de passe
+            </ion-item>
+            <ion-item button (click)="logout()">
+              <ion-icon name="log-out-outline" slot="start" style="color: black;"></ion-icon>
+              Déconnexion
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="chartOptions">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+      style="width: 100%; height: 400px; display: block;">
+    </highcharts-chart>
+  </div>
+
+  <ion-card class="custom-box " style="margin: 20px;">
+    <ion-card-header>
+      <ion-card-title>les interventions par atelier</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let atelier of atelierCategories; let i = index">
+          <ion-label>
+            {{ atelier }} : <strong>{{ atelierData[i] }}</strong> interventions
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>

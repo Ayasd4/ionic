@@ -12,7 +12,7 @@ interface AuthResponse {
 })
 export class LoginService {
 
- baseUrl: string = `https://pfe-vxpy.onrender.com`;
+ baseUrl: string = `https://pfe-backend-ztxi.onrender.com`;
   
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();

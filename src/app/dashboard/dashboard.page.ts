@@ -29,6 +29,14 @@ import { ChangePasswordPage } from '../change-password/change-password.page';
   ]
 })
 export class DashboardPage implements OnInit {
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+
+
   totalVehicles: number = 0;
   totalDrivers: number = 0;
   totalTechnicians: number = 0;
@@ -64,7 +72,7 @@ export class DashboardPage implements OnInit {
 
   }
 
-  profilUser(){
+  profilUser() {
     this.subscription = this.loginService.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
       console.log("isLoggedIn:", this.isLoggedIn);
@@ -114,7 +122,7 @@ export class DashboardPage implements OnInit {
   isActive(route: string): boolean {
     return this.router.url === route;
   }
-  
+
   /*get currentRoute() {
     return this.router.url;
   }*/

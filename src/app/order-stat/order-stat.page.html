@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>order-stat</ion-title>
+    <ion-title>Order</ion-title>
     <ion-buttons slot="end" *ngIf="isLoggedIn">
       <ion-button (click)="openPopover($event)">
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
@@ -13,7 +13,7 @@
               <ion-icon name="key-outline" slot="start" style="color: black;"></ion-icon>
               Change Password
             </ion-item>
-            
+
             <ion-item button (click)="logout()">
               <ion-icon name="log-out-outline" slot="start" style="color: black;"></ion-icon>
               Sign Out
@@ -28,6 +28,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="chart-container" [chart]="chart"></div>
   <ion-grid>
     <ion-row>

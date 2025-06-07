@@ -25,7 +25,14 @@ import { Router } from '@angular/router';
   ]
 })
 export class ChangePasswordPage implements OnInit {
-
+ handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+  
+  
   changePasswordForm: FormGroup;
   errorMessage: string = '';
   message: string = '';

@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { InterventionStatPage } from './intervention-stat/intervention-stat.page';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ChartModule,
     MatIconModule, 
     RouterModule,
+    InterventionStatPage,
 
     // Angular Material modules
     MatButtonModule,

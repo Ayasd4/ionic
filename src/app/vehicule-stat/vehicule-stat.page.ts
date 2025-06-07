@@ -28,6 +28,13 @@ import { LoginService } from '../login/login.service';
 })
 export class VehiculeStatPage implements OnInit {
 
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+  
   chart!: Chart;
   chartOptions: Highcharts.Options = {};
 
@@ -53,7 +60,7 @@ export class VehiculeStatPage implements OnInit {
     this.profilUser();
   }
 
-  profilUser(){
+  profilUser() {
     this.subscription = this.loginService.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
       console.log("isLoggedIn:", this.isLoggedIn);

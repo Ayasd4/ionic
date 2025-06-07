@@ -9,10 +9,11 @@
 mat-form-field {
   width: 100%;
 }
+
 ion-button {
   font-weight: 600;
   font-size: 16px;
-  --background:#1d2908d3 ;
+  --background: #1d2908d3;
 }
 
 
@@ -33,7 +34,7 @@ ion-button {
   margin-left: 5px;
 }
 
-ion-label{
+ion-label {
   text-transform: lowercase;
 }
 
@@ -41,12 +42,13 @@ ion-label{
 background-color: #556b2fd3; //150631
   
 }*/
+
 ion-toolbar {
-  --background: #556b2fd3; //150631
+  --background: #3e4f20; //150631
   /* Couleur de fond personnalisée (bleu Ionic par défaut) */
   --color: #ffffff;
   --padding-start: 5px;
-  --padding-end: 0px; 
+  --padding-end: 0px;
   --min-height: 60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid #ccc;
@@ -72,5 +74,5 @@ ion-content {
   padding: 16px;
   border-radius: 12px;
   margin-top: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

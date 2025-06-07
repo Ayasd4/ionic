@@ -1,36 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { ConsomationStatPageRoutingModule } from './consomation-stat-routing.module';
-
-import { ConsomationStatPage } from './consomation-stat.page';
-import { HighchartsChartModule } from 'highcharts-angular';
+import { InterventionStatPage } from './intervention-stat.page';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { FooterComponent } from '../footer/footer.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { InterventionStatPageRoutingModule } from './intervention-stat-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConsomationStatPageRoutingModule,
-    ConsomationStatPage,
-    MatSelectModule,
+    InterventionStatPage,
+    InterventionStatPageRoutingModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatOptionModule,
     ReactiveFormsModule,
     HighchartsChartModule,
-    FooterComponent
+    FooterComponent,
+    MatIconModule
 
-  ],
-  //declarations: [ConsomationStatPage]
+  ]
+  //declarations: [InterventionStatPage]
 })
-export class ConsomationStatPageModule { }
+export class InterventionStatPageModule {}
