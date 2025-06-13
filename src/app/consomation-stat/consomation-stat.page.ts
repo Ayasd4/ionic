@@ -1,5 +1,3 @@
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -116,7 +114,6 @@ export class ConsomationStatPage implements OnInit {
 
 
   }
-
 
   getNumparc() {
     this.numparcService.fetchAllNumparc().subscribe({
